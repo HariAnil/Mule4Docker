@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="3cbf4a20-9703-4589-ad86-733858e4288c" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="mule4basicsFlow" doc:id="787e4124-a2b5-4789-b275-6ef006b73d95" >
+		<http:listener doc:name="HelloWorld Listener" doc:id="8c30b4f9-ebfb-43de-b833-f0930c60b8b0" config-ref="HTTP_Listener_config" path="/hello/{username}"/>
+		<set-variable value="#[message.attributes.uriParams.username]" doc:name="HelloWorld Variable" doc:id="228b8e36-476c-4596-83c9-f970b6653657" variableName="helloWorld"/>
+		<set-payload value="#['Hello ' ++ vars.helloWorld as String]" doc:name="HelloWorld Payload" doc:id="0bec6bcc-4f4b-42f9-ac94-2a92667fc0b7" mimeType="text/plain"/>
+		<logger level="INFO" doc:name="HelloWorld Logger" doc:id="c5e7af41-a1a2-495a-a48b-6f05a5688b5d" message="#[message.payload]"/>
+	</flow>
+</mule>
