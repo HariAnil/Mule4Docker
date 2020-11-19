@@ -1,0 +1,7 @@
+mulesoftPipeline{
+	scmUrl='http://10.1.10.46:9090/artifactory'
+	mavenConfigId='jenkins-maven-config'
+	serviceName='HelloWorld'
+		memoryLimit='2Gi'
+		useDomain='false'
+}
